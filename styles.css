@@ -1,0 +1,531 @@
+:root {
+  --base-font-size: 1rem;
+  --heading-ratio: 1.333; /* Perfect fourth scale */
+  --text-color: #333;
+  --primary-color: #2196F3;
+  --secondary-color: #4CAF50;
+  --error-color: #ff4444;
+  --border-color: #ddd;
+  --bg-color: white;
+  --delete-color: #ff4444;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--text-color);
+  background-color: var(--bg-color);
+  min-height: 100vh;
+
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none;    /* Firefox */
+  -ms-user-select: none;     /* IE/Edge */
+  user-select: none;         /* Стандарт */
+}
+
+/* Fluid typography with clamp() */
+html {
+  font-size: clamp(14px, 1.5vw, 18px);
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+.label-text {
+  margin: 0;
+  padding: 10px;
+}
+
+.wrapper {
+  width: min(90%, 1400px); /* От 90% на мобильных до максимум 1400px */
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Для 2K (2560px) и выше */
+@media (min-width: 2560px) {
+  .wrapper {
+    width: min(70%, 1600px);
+  }
+}
+
+/* Для 4K (3840px) и выше */
+@media (min-width: 3840px) {
+  .wrapper {
+    width: min(60%, 1800px);
+  }
+}
+
+/* Типография */
+h1 {
+  font-family: "Satisfy", cursive;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 400;
+  color: var(--primary-color);
+  margin: clamp(1rem, 5vh, 3rem) 0 1rem;
+  line-height: 1.2;
+}
+
+h2 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  margin: 1.5rem 0 1rem;
+}
+
+p {
+  font-size: clamp(1rem, 1.2vw, 1.1rem);
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+.version-text {
+  font-size: 0.7em;
+  vertical-align: super;
+}
+
+/* Элементы форм и кнопки */
+button {
+  font-size: clamp(0.9rem, 1.1vw, 1rem);
+  border: 0;
+  background-color: var(--secondary-color);
+  padding: clamp(0.5rem, 1vw, 0.7rem) clamp(1rem, 1.5vw, 1.3rem);
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  margin-right: 0.8rem;
+  margin-bottom: 0.8rem;
+  transition: all 0.2s ease;
+}
+
+button:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+
+#btnGenerateTable {
+  background-color: var(--primary-color);
+}
+
+#btnDownloadTablePng, #btnDownloadTableExcel {
+  background-color: var(--error-color);
+}
+#btnImportExcel {
+    background-color: var(--primary-color);
+}
+
+/* Добавим в конец файла */
+.style-settings {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 15px;
+    padding: 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.style-settings label {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.9rem;
+}
+
+.style-settings input[type="color"] {
+    width: 100%;
+    height: 40px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.style-settings input[type="range"] {
+    width: 100%;
+    margin-top: 5px;
+}
+
+details summary {
+    cursor: pointer;
+    padding: 8px;
+    background-color: #f1f1f1;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+details[open] summary {
+    margin-bottom: 10px;
+}
+
+
+/* Общие стили для кнопок с иконками */
+.btn-with-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    white-space: nowrap;
+}
+
+.btn-with-icon img {
+    flex-shrink: 0;
+    object-fit: contain;
+}
+
+/* Адаптация для мобильных устройств */
+@media (max-width: 768px) {
+    .btn-with-icon {
+        flex-direction: row; /* Важно: сохраняем горизонтальное направление */
+        gap: 6px;
+    }
+    
+    .btn-with-icon img {
+        width: 24px;
+        height: 24px;
+    }
+}
+
+/* Поля ввода */
+.song-input {
+  display: flex;
+  align-items: center;
+  margin: 0.5rem 0;
+  outline: none;
+}
+
+.song-text, .song-author {
+  padding: clamp(0.5rem, 1vw, 0.7rem);
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  margin-left: 0.5rem;
+  font-size: clamp(0.9rem, 1.1vw, 1rem);
+  flex-grow: 1;
+  outline: none;
+}
+
+.song-number {
+  font-size: 0.9em;
+  min-width: 1.5em;
+  outline: none;
+}
+
+
+
+
+.delete-row-btn {
+  background: none;
+  border: none;
+  color: var(--delete-color);
+  font-size: clamp(1.2rem, 1.5vw, 1.5rem);
+  cursor: pointer;
+  padding: 0 0.5rem;
+  line-height: 1;
+  border-radius: 50%;
+  transition: all 0.2s;
+  margin-left: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(1.8rem, 2.5vw, 2.2rem);
+  height: clamp(1.8rem, 2.5vw, 2.2rem);
+}
+
+.delete-row-btn:hover {
+  background-color: var(--delete-color);
+  color: white;
+}
+
+/* Чекбоксы и селекты */
+
+/* Убираем стандартный чекбокс */
+.checkbox-container input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  display: inline-block;
+  height: clamp(25px, 2vw, 30px) !important; /* Увеличенный размер */
+  width: clamp(25px, 2vw, 30px) !important;
+  background-color: #eee;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+/* Стиль для галочки (если она есть) */
+.checkbox-container input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+
+.checkbox-container .checkmark:after {
+  content: "";
+  display: none;
+  position: absolute;
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.checkbox-container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Контейнер для выравнивания */
+.size-container {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px; /* Отступ между select и текстом */
+}
+
+/* Стилизация select */
+.size-container select {
+  font-size: clamp(0.9rem, 1.1vw, 1rem);
+  height: clamp(30px, 2.5vw, 35px);
+  min-width: 80px;
+  padding: 0 25px 0 10px; /* Правое поле для стрелки */
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  background-color: white;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  position: relative; /* Для позиционирования стрелки */
+}
+
+/* Кастомная стрелка ТОЛЬКО для select */
+.size-container select::after {
+  content: "▼";
+  font-size: 0.7em;
+  color: #555;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+/* Альтернатива через background (кросс-браузерный вариант) */
+.size-container select {
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23555'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  background-size: 12px;
+}
+
+/* Хелпер-классы */
+.error {
+  border: 1px solid var(--error-color) !important;
+  box-shadow: 0 0 0 2px rgba(255, 68, 68, 0.2);
+  background-color: rgba(255, 68, 68, 0.2);
+  animation: shake 0.5s;
+}
+
+.disabled-element {
+  opacity: 0.5;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+/* Анимации */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-5px); }
+  40%, 80% { transform: translateX(5px); }
+}
+
+/* Адаптивные изображения */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Горизонтальные линии */
+hr {
+  margin: clamp(1rem, 3vh, 2rem) 0;
+  border: 0;
+  height: 1px;
+  background-color: var(--border-color);
+}
+
+/* Контейнеры */
+.input-container, .outputOptions {
+  margin: 1.5rem 0;
+  padding: clamp(1rem, 2vw, 1.5rem);
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+}
+
+/* Кнопка удаления */
+.delete-row-btn {
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  padding: 0 0.5rem;
+}
+
+/* Canvas */
+#canvas {
+  max-width: 100%;
+  height: auto;
+  display: none;
+  margin: 1.5rem 0;
+  border: 1px solid var(--border-color);
+  background-color: white;
+}
+
+/* Мобильная адаптация */
+@media (max-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+  
+  .wrapper {
+    width: 95%;
+    padding: 0 0.5rem;
+  }
+  
+  button {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 0.5rem;
+  }
+  
+  .song-input {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .song-text, .song-author {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 0.3rem;
+  }
+}
+
+
+
+/* Footer styles */
+footer {
+    background-color: #333;
+    color: white;
+    padding: 2rem 0;
+    margin-top: 3rem;
+    font-size: 0.9rem;
+}
+
+.footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: min(90%, 1400px);
+    margin: 0 auto;
+    padding: 0 1rem;
+    gap: 2rem;
+}
+
+.footer-section {
+    flex: 1;
+    min-width: 200px;
+    margin-bottom: 1.5rem;
+}
+
+.footer-section h3 {
+    color: #4CAF50;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.contact-list li {
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.contact-list img {
+    margin-right: 8px;
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+}
+
+.social-links a {
+    transition: transform 0.3s ease;
+}
+
+.social-links a:hover {
+    transform: translateY(-3px);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 1.5rem;
+    border-top: 1px solid #444;
+    width: min(90%, 1400px);
+    margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+    }
+    
+    .footer-section {
+        margin-bottom: 2rem;
+    }
+}
+
+
+.input-container {
+    overflow: hidden;
+    transition: 
+        max-height 0.5s ease-in-out,
+        opacity 0.3s ease-in-out,
+        padding 0.3s ease-in-out,
+        margin 0.3s ease-in-out;
+    max-height: 5000px; /* Большое значение для контейнера */
+    opacity: 1;
+}
+
+.input-container.hidden-list {
+    max-height: 0 !important;
+    opacity: 0;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    border: none !important;
+}
+
+.toggle-list-btn {
+    background-color: #607D8B !important;
+    margin-left: 10px;
+}
+
+/* Добавим стиль для отключенной кнопки */
+.toggle-list-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.toggle-list-btn:disabled:hover {
+    transform: none;
+    opacity: 0.6;
+}

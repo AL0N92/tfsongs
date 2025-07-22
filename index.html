@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&family=Satisfy&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+    <title>TFSongs</title>
+</head>
+<body>
+    <div class="wrapper">
+        <h1>Tables from Songs<span class="version-text">v6.1</span></h1>
+        <p style="border: 1px solid #ddd; border-radius: 5px; padding: 5px;">— Сайт для создания таблиц из списка песен. </p>
+        
+        <img style="margin-top: 20px" width="40" height="40" src="info.gif" alt="Информация">
+        <p style="border: 1px solid #ddd; border-radius: 5px; padding: 5px;">
+            Вы можете использовать вставку из буфера, она требует необходимого формата, представленного ниже. 
+            <span style="color: black">ВНИМАНИЕ!</span> в случае вставки списка из буфера, весь текущий список очищается и вставляется новый. 
+            Точно так же это работает для изменения чекбокса <span style="border: 1px solid #ddd; border-radius: 5px; padding: 3px; background-color: #f1f1f1;">"Указывать авторов в таблице?"</span> 
+            - если вы поменяете значение, то все введенные строки очистятся. Еще если вы 
+            вставляете песни без авторов, то необходимо указывать названия песен в кавычках. Разницы в использовании символа кавычек - нет 
+            <span style="border: 1px solid #ddd; border-radius: 5px; padding: 3px; background-color: #f1f1f1;">(", ', «, „)</span>.
+        </p>
+        <p><b>Формат ввода:</b><br><span style="border: 1px solid #ddd; border-radius: 5px; padding: 3px; background-color: #f1f1f1;">"Название песни" Автор</span> </p>
+        
+        <hr>
+
+        <img style="margin-top: 20px" width="48" height="48" src="https://img.icons8.com/fluency/48/settings.png" alt="Настройки"/><br>
+        <div class="outputOptions">
+            <label class="checkbox-container">
+                <input type="checkbox" id="isAuthors" name="isAuthors" value="yes">
+                <span class="checkmark"></span>
+                <span class="label-text">Указывать авторов в таблице?</span>
+            </label>
+            <br>
+            <label style="margin-top: 1%;" class="checkbox-container">
+                <input type="checkbox" id="isAuthorsOutput" name="isAuthorsOutput" value="yes">
+                <span class="checkmark"></span>
+                <span class="label-text">Писать слово "Автор: " в таблице?</span>
+            </label>
+
+            <p class="label-text">Размеры таблицы:</p>
+            <label class="size-container">
+                <select id="tableSize">
+                    <option value="3">3×3</option>
+                    <option value="4">4×4</option>
+                    <option value="5">5×5</option>
+                    <option value="6">6×6</option>
+                    <option value="7">7×7</option>
+                    <option value="8">8×8</option>
+                </select>
+                <span>Фиксированный размер</span>
+            </label>
+            <br>
+
+            <label class="checkbox-container">
+                <input type="checkbox" id="isAutoSize" name="isAutoSize" value="no">
+                <span class="checkmark"></span>
+                <span class="label-text">Авто-размер (Из всех введенных элементов)</span>
+            </label>
+
+            <p class="label-text">Настройки стиля таблицы: </p>
+            <div class="style-settings">
+                <label>
+                    Цвет текста:
+                    <input type="color" id="textColor" value="#212529">
+                </label><br>
+                <label>
+                    Размер текста названия:
+                    <input type="range" id="titleFontSize" min="10" max="30" value="16">
+                    <span id="titleFontSizeValue">16px</span>
+                </label><br>
+                <label>
+                    Размер текста автора:
+                    <input type="range" id="authorFontSize" min="8" max="24" value="14">
+                    <span id="authorFontSizeValue">14px</span>
+                </label><br>
+                <label>
+                    Цвет фона:
+                    <input type="color" id="cellBackgroundColor" value="#c0c6ca">
+                </label><br>
+                <label>
+                    Цвет обводки:
+                    <input type="color" id="borderColor" value="#dee2e6">
+                </label><br>
+                <label>
+                    Толщина обводки:
+                    <input type="range" id="borderWidth" min="1" max="5" value="1">
+                    <span id="borderWidthValue">1px</span>
+                </label>
+            </div>
+        </div>
+        
+
+        <hr style="margin-top: 10%;">
+
+        <p>Вы можете загрузить список из таблицы Excel. Скачайте образец, отредактируйте его и импортируйте для загрузки списка.</p>
+        <button id="btnDownloadExcelExample" class="btn-with-icon">
+            <a href="example.xlsx" download class="btn-with-icon" style="display: inline-block;">
+                <img width="50" height="50" src="https://img.icons8.com/parakeet/50/download.png" alt="download"/>
+                <span>Скачать образец .xlsx</span>
+            </a>
+        </button>
+
+        <input type="file" id="excelFileInput" accept=".xlsx, .xls" style="display: none;">
+        <button id="btnImportExcel" class="btn-with-icon">
+            <img width="50" height="50" src="https://img.icons8.com/parakeet/50/upload.png" alt="upload"/>
+            <span>Импорт из Excel</span>
+        </button>
+
+        <h2>Введите список песен</h2>
+        <div class="input-container" id="inputContainer">
+            <!-- Тут все строки -->
+             
+        </div>
+
+        <div style="display: flex; justify-content: space-between; margin-top: 15px;">
+            <button id="btnToggleList" class="btn-with-icon toggle-list-btn">
+                <img width="20" height="20" src="https://img.icons8.com/ios/50/hide.png" alt="hide"/>
+                <span>Скрыть список</span>
+            </button>
+        </div>
+
+        <button id="btnAddRow">Добавить строку</button>
+
+        <button id="btnGenerateTable">Сгенерировать таблицу</button>
+
+        <canvas id="canvas" width="1000" height="600" style="display: none;"></canvas>
+        <button id="btnDownloadTablePng" style="display: none;">Скачать таблицу в .png</button>
+        <button id="btnDownloadTableExcel" style="display:none;"> Скачать таблицу в excel</button>
+
+        <p></p>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>TFSongs</h3>
+                <p>Создавайте красивые таблицы из списка песен для ваших мероприятий и проектов.</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Соцсети</h3>
+                <div class="social-links">
+                    <a href="https://vk.com/shzz1" target="_blank"><img width="32" height="32" src="https://img.icons8.com/color/48/vk-com.png" alt="VK"></a>
+                    <a href="https://t.me/DFEAI" target="_blank"><img width="32" height="32" src="https://img.icons8.com/color/48/telegram-app--v1.png" alt="Telegram"></a>
+                    <a href="https://github.com/AL0N92" target="_blank"><img width="32" height="32" src="https://img.icons8.com/ios-glyphs/30/FFFFFF/github.png" alt="GitHub"></a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 TFSongs. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script src="js/utils.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/excel-handler.js"></script>
+    <script src="js/table-generator.js"></script>
+    <script src="js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+</body>
+</html>
